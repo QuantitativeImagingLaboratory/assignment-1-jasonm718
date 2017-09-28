@@ -8,9 +8,21 @@ class interpolation:
         unknown: take and unknown location
         return the f(unknown) or intentity at unknown"""
 
-        #Write your code for linear interpolation here
+        """
+            Linear interpolation Formula:     
+            I = ((i1(x2 - x))/(x2 - x1)) + ((i2(x - x1))/(x2 - x1))
+        """
+        # Write your code for linear interpolation here
+        i1 = pt1[1]
+        x1 = pt1[0]
+        i2 = pt2[1]
+        x2 = pt2[0]
 
-        return 0
+        x = unknown
+
+        I = ((i1(x2 - x)) / (x2 - x1)) + ((i2(x - x1)) / (x2 - x1))
+
+        return I
 
     def bilinear_interpolation(self, pt1, pt2, pt3, pt4, unknown):
         """Computes the linear interpolation for the unknown values using pt1 and pt2
