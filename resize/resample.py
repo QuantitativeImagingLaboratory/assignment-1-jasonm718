@@ -27,22 +27,23 @@ class resample:
         """
 
         #Write your code for nearest neighbor interpolation here
-        height, width = image.shape
+        width, height = image.shape
         print(width)
         print(height)
 
         newW = int(float(fx) * width)
-        newH = int(float(fx) * height)
-
+        newH = int(float(fy) * height)
+        print(newW,newH)
 
         ima = np.zeros((newW, newH))
 
-        """for i in range(len(ima2)):
-            for j in range(len(ima2[i])):
-                print(ima2[i][j])
-"""
-
-        #image = cv2.resize(image, None, fx = 2, fy = 2, interpolation= cv2.INTER_NEAREST)
+        for i in range(0, newW):
+            for j in range(0, newH):
+                srcX = int(round(float(i) / float(newW) * float(width)))
+                srcY = int(round(float(j) / float(newH) * float(height)))
+                srcX = min(srcX, width - 1)
+                srcY = min(srcY, height - 1)
+                ima[i][j] = image[srcX][srcY]
 
         return ima
 

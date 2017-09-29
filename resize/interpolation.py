@@ -38,3 +38,5 @@ class interpolation:
         # May be you can reuse or call linear interpolatio method to compute this task
 
         return 0
+
+    print(linear_interpolation((0, 1), (1, 15), 0.3))
