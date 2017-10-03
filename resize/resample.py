@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+import math
+from resize import interpolation
 
 class resample:
 
@@ -39,11 +41,12 @@ class resample:
 
         for i in range(0, newW):
             for j in range(0, newH):
-                srcX = int(round(float(i) / float(newW) * float(width)))
-                srcY = int(round(float(j) / float(newH) * float(height)))
-                srcX = min(srcX, width - 1)
-                srcY = min(srcY, height - 1)
-                ima[i][j] = image[srcX][srcY]
+
+                x = int(round(float(i) / float(newW) * float(width)))
+                y = int(round(float(j) / float(newH) * float(height)))
+                x = min(x, width - 1)
+                y = min(y, height - 1)
+                ima[i][j] = image[x][y]
 
         return ima
 
@@ -57,6 +60,39 @@ class resample:
         """
 
         # Write your code for bilinear interpolation here
+        width, height = image.shape
+        print(width)
+        print(height)
 
-        return image
+        newW = int(float(fx) * width)
+        newH = int(float(fy) * height)
+        print(newW, newH)
+
+        ima = np.zeros((newW, newH))
+
+        inter = interpolation
+
+        for i in range(0, newW):
+            for j in range(0, newH):
+                
+                a = (i / newW)
+                b = (j / newH)
+
+                x = math.floor(a * width)
+                y = math.floor(b * height)
+
+                NW = image[x][y]
+                NE = image[x ][y+1]
+                SW = image[x+1][y ]
+                SE = image[x+1][y + 1]
+
+                uI = (b * height) - y
+                uJ = (a * width) - x
+
+
+                result = inter.bilinear_interpolation(NW, NE, SW, SE, (uI,uJ))
+
+                ima[i][j] = result
+
+        return ima
 
