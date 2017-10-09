@@ -9,7 +9,8 @@ class cell_counting:
         takes a input:
         image: binary image
         return: a list of regions"""
-
+        regions = dict()
+        """"
         w, h = image.shape
 
         regions = dict()
@@ -48,6 +49,7 @@ class cell_counting:
                     regions[R[i, j]].append((i, j))
 
         print(regions.keys())
+        """
         return regions
 
     def compute_statistics(self, region):
